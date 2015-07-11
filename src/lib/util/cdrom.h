@@ -117,6 +117,7 @@ UINT32 cdrom_read_subcode(cdrom_file *file, UINT32 lbasector, void *buffer, bool
 UINT32 cdrom_get_track(cdrom_file *file, UINT32 frame);
 UINT32 cdrom_get_track_start(cdrom_file *file, UINT32 track);
 UINT32 cdrom_get_track_start_phys(cdrom_file *file, UINT32 track);
+chd_file *cdrom_get_chd(cdrom_file *file);
 
 /* TOC utilities */
 int cdrom_get_last_track(cdrom_file *file);

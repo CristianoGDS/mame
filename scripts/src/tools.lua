@@ -105,6 +105,67 @@ files {
 }
 
 --------------------------------------------------
+-- libchd
+--------------------------------------------------
+
+project("libchd")
+uuid ("9dacbf98-d6bd-4def-a459-1d43d3cadb7b")
+kind "SharedLib"	
+
+options {
+	"ForceCPP",
+}
+
+flags {
+	"Symbols", -- always include minimum symbols for executables 	
+}
+
+if _OPTIONS["SEPARATE_BIN"]~="1" then 
+	targetdir(MAME_DIR)
+end
+
+links {
+	"utils",
+	"expat",
+	"7z",
+	"ocore_" .. _OPTIONS["osd"],
+}
+
+if _OPTIONS["with-bundled-zlib"] then
+	links {
+		"zlib",
+	}
+else
+	links {
+		"z",
+	}
+end
+
+if _OPTIONS["with-bundled-flac"] then
+	links {
+		"flac",
+	}
+else
+	links {
+		"FLAC",
+	}
+end
+
+linkoptions {
+		"-Wl,--output-def,../../../../../libchd.def",
+}
+
+includedirs {
+	MAME_DIR .. "src/osd",
+	MAME_DIR .. "src/lib/util",
+	MAME_DIR .. "3rdparty",
+}
+
+files {
+	MAME_DIR .. "src/tools/libchd.c",
+}
+
+--------------------------------------------------
 -- jedutil
 --------------------------------------------------
 
